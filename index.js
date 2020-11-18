@@ -1,25 +1,5 @@
-class Cliente {
-  nome;
-  cpf;
-}
-class ContaCorrente {
-  agencia;
-  _saldo = 0;
-
-  sacar(valor) { // método chamado em POO
-    if (this._saldo >= valor) { // Saldo dessa conta corrente, e não de uma conta específica. Valor de saque
-      this._saldo -= valor;
-      return valor;
-    } // Definição do escoppo
-  }
-
-  depositar(valor) {
-    if(valor <= 0) {
-      return;
-    }
-    this._saldo += valor;
-  }
-}
+import {Cliente} from "./Cliente.js";
+import {ContaCorrente} from "./ContaCorrente.js";
 
 const cliente1 = new Cliente();
 cliente1.nome = "Ricardo";
@@ -30,15 +10,15 @@ cliente2.nome = "Alice";
 cliente2.cpf = 88822233309;
 
 const contaCorrenteRicardo = new ContaCorrente();
-// contaCorrenteRicardo.#saldo = 10000;
 contaCorrenteRicardo.agencia = 1001;
+contaCorrenteRicardo.cliente = cliente1;
+contaCorrenteRicardo.depositar(500);
 
-contaCorrenteRicardo.depositar(100);
-contaCorrenteRicardo.depositar(100);
-contaCorrenteRicardo.depositar(100);
+const conta2 = new ContaCorrente();
+conta2.cliente = cliente2;
+conta2.agencia = 102; 
 
-const valorSacado = contaCorrenteRicardo.sacar(50);
-
-console.log(valorSacado);
-
-console.log(contaCorrenteRicardo);
+let valor = 200;
+contaCorrenteRicardo.transferir(valor, conta2);
+console.log("valor, ", valor)
+console.log(conta2);
