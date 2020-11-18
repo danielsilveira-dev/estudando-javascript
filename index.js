@@ -4,12 +4,20 @@ class Cliente {
 }
 class ContaCorrente {
   agencia;
-  saldo;
+  _saldo = 0;
 
-  sacar(valor) {
-    if (this.saldo >= valor) {
-      this.saldo -= valor;
+  sacar(valor) { // método chamado em POO
+    if (this._saldo >= valor) { // Saldo dessa conta corrente, e não de uma conta específica. Valor de saque
+      this._saldo -= valor;
+      return valor;
+    } // Definição do escoppo
+  }
+
+  depositar(valor) {
+    if(valor <= 0) {
+      return;
     }
+    this._saldo += valor;
   }
 }
 
@@ -22,14 +30,15 @@ cliente2.nome = "Alice";
 cliente2.cpf = 88822233309;
 
 const contaCorrenteRicardo = new ContaCorrente();
-contaCorrenteRicardo.saldo = 0;
+// contaCorrenteRicardo.#saldo = 10000;
 contaCorrenteRicardo.agencia = 1001;
 
-console.log(contaCorrenteRicardo.saldo);
-contaCorrenteRicardo.saldo = 100;
-console.log(contaCorrenteRicardo.saldo);
-contaCorrenteRicardo.sacar(50);
+contaCorrenteRicardo.depositar(100);
+contaCorrenteRicardo.depositar(100);
+contaCorrenteRicardo.depositar(100);
 
-console.log(contaCorrenteRicardo.saldo);
-console.log(cliente1);
-console.log(cliente1);
+const valorSacado = contaCorrenteRicardo.sacar(50);
+
+console.log(valorSacado);
+
+console.log(contaCorrenteRicardo);
